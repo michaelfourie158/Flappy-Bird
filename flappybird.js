@@ -29,6 +29,12 @@ let bottomPipeImg;
 
 //physics
 let velocityX = -1; //pipes move left
+let velocityY = 0; //bird just speed
+let gravity = 0.1;
+
+let gameOver = false;
+
+let score = 0;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -51,24 +57,62 @@ window.onload = function() {
 
     requestAnimationFrame(update);
     setInterval(placePipes, 1800); //1.5s
+    document.addEventListener("keydown",moveBird);
+    document.addEventListener("mousedown", moveBird);
 }
 
 function update() {
     requestAnimationFrame(update);
+    if (gameOver) {
+        return;
+    }
     context.clearRect(0, 0, board.width, board.height);
 
     //bird
+    velocityY += gravity;
+    bird.y = Math.max(bird.y + velocityY, 0);
     context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height)
+
+    if (bird.y > board.height) {
+        gameOver = true;
+    }
 
     //pipes
     for (let i = 0; i < pipeArray.length; i++) {
         let pipe = pipeArray[i];
         pipe.x += velocityX;
         context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
+
+        if (!pipe.passed && bird.x > pipe.x + pipe.width) {
+            score += 0.5; // 2 pipes. so 0.5 for bottom and 0.5 for top.
+            pipe.passed = true;
+        }
+
+        if (detectCollision(bird, pipe)) {
+            gameOver = true;
+        }
+    }
+
+    //clear passed pipes
+    while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
+        pipeArray.shift(); // removes first element from the array
+    }
+
+    //score
+    context.fillStyle = "white";
+    context.font="45px sans-serif";
+    context.fillText(score, 5, 45);
+
+    if (gameOver) {
+        context.fillText("GAME OVER", 5, 90);
     }
 }
 
 function placePipes() {
+
+    if (gameOver) {
+        return;
+    }
 
     let randomPipeY = pipeY - pipeHeight/4 - Math.random()*(pipeHeight/2);
     let openingSpace = board.height/4;
@@ -94,4 +138,26 @@ function placePipes() {
     }
 
     pipeArray.push(bottomPipe);
+}
+
+function moveBird(e) {
+    if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.type == "mousedown") {
+        //jump
+        velocityY = -3;
+
+        //reset game
+        if (gameOver) {
+            bird.y = birdY;
+            pipeArray = [];
+            score = 0;
+            gameOver = false;
+        }
+    }
+}
+
+function detectCollision(a, b) {
+    return a.x < b.x + b.width &&
+           a.x + a.width > b.x &&
+           a.y < b.y + b.height &&
+           a.y + a.height > b.y;
 }
