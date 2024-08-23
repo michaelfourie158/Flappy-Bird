@@ -42,7 +42,7 @@ let hasGameOverSoundPlayed = false;
 
 let highScore = localStorage.getItem("highScore") || 0;
 
-let weather = "none"; // options: "none", "rain", "snow", "wind"
+let weather = "none"; // options: "none", "rain", "snow", "wind", strongWind"
 let weatherInterval;
 
 
