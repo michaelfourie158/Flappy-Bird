@@ -1,16 +1,29 @@
 body {
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #000;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
 }
 
 #board {
-    background-image: url("./flappybirdbg.png");
-    background-size: cover;
-    display: block;
+  background-image: url("./flappybirdbg.png"); /* Make sure the path to your image is correct */
+  background-size: cover;
+  background-position: center;
+  display: block;
+  border: 2px solid #fff; /* Optional for better visual separation */
+}
+
+#startScreen {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
 }
