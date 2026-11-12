@@ -2,27 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Flappy Bird game made with HTML, CSS, and JavaScript"
-    />
-    <meta
-      name="keywords"
-      content="flappy bird, game, html, css, javascript, web development"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="description" content="Flappy Bird game made with HTML, CSS, and JavaScript" />
+    <meta name="keywords" content="flappy bird, game, html, css, javascript, web development" />
     <meta name="author" content="Michael Fourie" />
-
+    <meta name="theme-color" content="#4ec0ca" />
     <title>Flappy Bird</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <link rel="stylesheet" href="flappybird.css" />
     <script src="flappybird.js" defer></script>
   </head>
   <body>
-    <canvas id="board"></canvas>
-    <audio id="gameOverSound" src="sfx_die.mp3"></audio>
+    <div id="wrap">
+      <canvas id="board" aria-label="Flappy Bird game"></canvas>
+    </div>
+    <audio id="gameOverSound" src="sfx_die.mp3" preload="auto"></audio>
   </body>
 </html>
